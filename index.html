@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Address Form - Court</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        background: #f2f2f2;
+        font-family: "Times New Roman", serif;
+        color: #000;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        margin: 0 0 25px;
+        text-transform: uppercase;
+    }
+
+    .row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .field {
+        flex: 1;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 9px;
+        border: 1px solid #777;
+        border-radius: 3px;
+        font-family: "Times New Roman", serif;
+        font-size: 16px;
+    }
+
+    textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .statement {
+        margin-top: 25px;
+        line-height: 1.7;
+        text-align: justify;
+        font-size: 17px;
+    }
+
+    .signature {
+        margin-top: 45px;
+        text-align: right;
+        font-size: 17px;
+    }
+
+    .buttons {
+        margin-top: 30px;
+        padding: 20px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    button {
+        padding: 11px 18px;
+        margin: 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .save {
+        background: #198754;
+        color: white;
+    }
+
+    .load {
+        background: #0d6efd;
+        color: white;
+    }
+
+    .print {
+        background: #212529;
+        color: white;
+    }
+
+    .reset {
+        background: #dc3545;
+        color: white;
+    }
+
+    .clear {
+        background: #6c757d;
+        color: white;
+    }
+
+    .success {
+        display: none;
+        margin-top: 15px;
+        padding: 10px;
+        background: #d1e7dd;
+        color: #0f5132;
+        text-align: center;
+        border: 1px solid #badbcc;
+    }
+
+    @media(max-width:700px) {
+        .row {
+            flex-direction: column;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    }
+
+    @media print {
+        body {
+            background: white;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: none;
+            box-shadow: none;
+            padding: 20px;
+        }
+
+        .buttons,
+        .success {
+            display: none !important;
+        }
+
+        input,
+        select,
+        textarea {
+            border: none;
+            padding: 2px 0;
+            background: transparent;
+            appearance: none;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Address Form</h1>
+
+    <div class="row">
+        <div class="field">
+            <label>In the Court of:</label>
+            <input type="text" id="court" placeholder="Name of Court">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="field">
+             <input type="text" id="Plaintiff" placeholder="Case Title / Parties">
+            <label>Versus:</label>
+            <input type="text" id="caseVersus" placeholder="Case Title / Parties">
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="field">
+            <label>Suit No. / Case No.:</label>
+            <input type="text" id="suitNo" placeholder="Enter Suit / Case Number">
+        </div>
+
+        <div class="field">
+            <label>Date of Hearing:</label>
+            <input type="date" id="hearingDate">
+        </div>
+
+    </div>
+
+    <hr>
+
+    <h3>The address of Plaintiff / Defendant / Applicant is as under:</h3>
+
+    <div class="row">
+
+        <div class="field">
+            <label>Party Type:</label>
+            <select id="partyType">
+                <option value="">-- Select --</option>
+                <option value="Plaintiff">Plaintiff</option>
+                <option value="Defendant">Defendant</option>
+                <option value="Applicant">Applicant</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Name:</label>
+            <input type="text" id="name" placeholder="Full Name">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="field">
+            <label>Father's Name:</label>
+            <input type="text" id="fatherName" placeholder="Father's Name">
+        </div>
+
+        <div class="field">
+            <label>Caste:</label>
+            <input type="text" id="caste" placeholder="Caste">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="field">
+            <label>Resident of:</label>
+            <input type="text" id="resident" placeholder="Village / Town / City">
+        </div>
+
+        <div class="field">
+            <label>Post Office:</label>
+            <input type="text" id="postOffice" placeholder="Post Office">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="field">
+            <label>Tehsil:</label>
+            <input type="text" id="tehsil" placeholder="Tehsil">
+        </div>
+
+        <div class="field">
+            <label>District:</label>
+            <input type="text" id="district" placeholder="District">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="field">
+            <label>PIN Code:</label>
+            <input
+                type="text"
+                id="pin"
+                maxlength="6"
+                pattern="[0-9]{6}"
+                placeholder="6 Digit PIN Code">
+        </div>
+
+        <div class="field">
+            <label>Remarks:</label>
+            <input type="text" id="remarks" placeholder="Remarks">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="field">
+            <label>Complete Address:</label>
+            <textarea id="completeAddress"
+                placeholder="Enter complete postal address"></textarea>
+        </div>
+    </div>
+
+    <div class="statement">
+
+        <p>
+            <strong>Sir,</strong>
+        </p>
+
+        <p>
+            All the summons, notices orders etc. in connection with the
+            above suit be sent to me at the address given above.
+        </p>
+
+        <p>
+            In case of any change in address, the same shall be communicated
+            with full particulars and details.
+        </p>
+
+    </div>
+
+    <div class="signature">
+
+        <p>
+            Signature of
+            <span id="signatureParty">Plaintiff / Defendant / Applicant</span>
+        </p>
+    </div>
+
+    <div class="buttons">
+
+        <button type="button" class="print" onclick="printForm()">
+            🖨 Print / Save PDF
+        </button>
+
+        <button type="button" class="clear" onclick="clearSavedForm()">
+            🗑 Clear Saved Data
+        </button>
+
+        <button type="button" class="reset" onclick="resetForm()">
+            ↻ Reset Form
+        </button>
+
+        <div id="successMessage" class="success"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const fieldIds = [
+    "court",
+    "caseVersus",
+    "suitNo",
+    "hearingDate",
+    "partyType",
+    "name",
+    "fatherName",
+    "caste",
+    "resident",
+    "postOffice",
+    "tehsil",
+    "district",
+    "pin",
+    "remarks",
+    "completeAddress"
+];
+
+/* Save form */
+function saveForm() {
+
+    const data = {};
+
+    fieldIds.forEach(function(id) {
+        const element = document.getElementById(id);
+        data[id] = element.value;
+    });
+
+    localStorage.setItem(
+        "courtAddressFormData",
+        JSON.stringify(data)
+    );
+
+    showMessage("Form saved successfully.");
+}
+
+
+/* Load saved form */
+function loadForm() {
+
+    const savedData = localStorage.getItem(
+        "courtAddressFormData"
+    );
+
+    if (!savedData) {
+        showMessage("No saved form was found.");
+        return;
+    }
+
+    const data = JSON.parse(savedData);
+
+    fieldIds.forEach(function(id) {
+
+        if (data[id] !== undefined) {
+            document.getElementById(id).value = data[id];
+        }
+
+    });
+
+    updatePartyName();
+
+    showMessage("Saved form loaded successfully.");
+}
+
+
+/* Clear saved data */
+function clearSavedForm() {
+
+    const confirmation = confirm(
+        "Are you sure you want to delete the saved form?"
+    );
+
+    if (!confirmation) {
+        return;
+    }
+
+    localStorage.removeItem(
+        "courtAddressFormData"
+    );
+
+    showMessage("Saved form data has been deleted.");
+}
+
+
+/* Reset current form */
+function resetForm() {
+
+    const confirmation = confirm(
+        "Are you sure you want to reset all fields?"
+    );
+
+    if (!confirmation) {
+        return;
+    }
+
+    fieldIds.forEach(function(id) {
+        document.getElementById(id).value = "";
+    });
+
+    updatePartyName();
+
+    showMessage("Form has been reset.");
+}
+
+
+/* Print */
+function printForm() {
+
+    window.print();
+
+}
+
+
+/* Success message */
+function showMessage(message) {
+
+    const box = document.getElementById(
+        "successMessage"
+    );
+
+    box.innerText = message;
+
+    box.style.display = "block";
+
+    setTimeout(function() {
+        box.style.display = "none";
+    }, 3000);
+
+}
+
+
+/* Change signature party automatically */
+document.getElementById("partyType")
+    .addEventListener("change", updatePartyName);
+
+
+function updatePartyName() {
+
+    const party = document.getElementById(
+        "partyType"
+    ).value;
+
+    const signature = document.getElementById(
+        "signatureParty"
+    );
+
+    if (party) {
+        signature.innerText = party;
+    } else {
+        signature.innerText =
+            "Plaintiff / Defendant / Applicant";
+    }
+
+}
+
+
+/* Automatically save whenever user changes a field */
+fieldIds.forEach(function(id) {
+
+    document.getElementById(id)
+        .addEventListener("input", function() {
+
+            // This only keeps the browser's current data
+            // available; permanent save happens with Save Form.
+
+        });
+
+});
+
+
+</script>
+
+</body>
+</html>
